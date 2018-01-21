@@ -64,8 +64,8 @@ services:
     ports:
       - "8989:8989"
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - ${CONFIG}/sonarr:/config
+      - /etc/localtime:/etc/localtime:ro
       - ${DOWNLOAD}:/downloads
       - ${DATA}/tv:/tv
       - ${DATA}/anime:/anime
@@ -83,9 +83,9 @@ services:
     ports:
       - "7878:7878"
     volumes:
+      - ${CONFIG}/radarr:/config
       - /etc/localtime:/etc/localtime:ro
       - ${DOWNLOAD}:/downloads
-      - ${CONFIG}/radarr:/config
       - ${DATA}/movies:/movies
     labels:
       traefik.enable: "true"
