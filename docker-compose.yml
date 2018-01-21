@@ -174,10 +174,10 @@ services:
       - "1900:1900/udp"
     volumes:
       - ${CONFIG}/plex:/config
-      - ${DATA}/tv:/tv
-      - ${DATA}/movies:/movies
-      - ${DATA}/music:/music
-      - ${DATA}/anime:/anime
+      - ${DATA}/tv:/media/tv
+      - ${DATA}/movies:/media/movies
+      - ${DATA}/music:/media/music
+      - ${DATA}/anime:/media/anime
     labels:
       traefik.enable: "true"
       traefik.port: "32400"
