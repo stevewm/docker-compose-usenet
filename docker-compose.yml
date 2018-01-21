@@ -1,0 +1,254 @@
+version: '3'
+
+services:
+  
+  traefik:
+    image: traefik:latest
+    command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false 
+    container_name: traefik
+    hostname: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${CONFIG}/traefik/acme.json:/etc/traefik/acme/acme.json
+      - ${CONFIG}/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - ${CONFIG}/traefik/.htpasswd:/etc/traefik/.htpasswd
+    labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host:monitor.${DOMAIN}"
+      traefik.port: "8080"
+      com.centurylinklabs.watchtower.enable: "true"
+ 
+  watchtower:
+    image: v2tec/watchtower:latest
+    command: --cleanup --label-enable --schedule="0 2 * * *"
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  ddclient:
+    image: linuxserver/ddclient
+    container_name: ddclient
+    volumes:
+      - ${CONFIG}/ddclient:/config
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    hostname: sabnzbd
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${CONFIG}/sabnzbd:/config
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DOWNLOAD}/incomplete:/incomplete-downloads
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8080"
+      traefik.frontend.rule: "Host:sabnzbd.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    hostname: sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIG}/sonarr:/config
+      - ${DOWNLOAD}:/downloads
+      - ${DATA}/tv:/tv
+      - ${DATA}/anime:/anime
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8989"
+      traefik.frontend.rule: "Host:sonarr.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOWNLOAD}:/downloads
+      - ${CONFIG}/radarr:/config
+      - ${DATA}/movies:/movies
+    labels:
+      traefik.enable: "true"
+      traefik.port: "7878"
+      traefik.frontend.rule: "Host:radarr.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  headphones:
+    image: linuxserver/headphones:latest
+    container_name: headphones
+    hostname: headphones
+    ports:
+      - "8282:8181"
+    volumes:
+      - ${CONFIG}/headphones:/config
+      - ${DOWNLOAD}:/downloads
+      - ${DATA}/music:/music
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8181"
+      traefik.frontend.rule: "Host:headphones.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+  
+  lazylibrarian:
+    image: linuxserver/lazylibrarian:latest
+    container_name: lazylibrarian
+    hostname: headphones
+    ports:
+      - "5299:5299"
+    volumes:
+      - ${CONFIG}/lazylibrarian:/config
+      - ${DOWNLOAD}:/downloads
+      - ${DATA}/books:/books
+    labels:
+      traefik.enable: "true"
+      traefik.port: "5299"
+      traefik.frontend.rule: "Host:lazylibrarian.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  mylar:
+    image: linuxserver/mylar:latest
+    container_name: mylar
+    hostname: mylar
+    ports:
+      - "8090:8090"
+    volumes:
+      - ${CONFIG}/mylar:/config
+      - ${DOWNLOAD}:/downloads
+      - ${DATA}/comics:/comics
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8090"
+      traefik.frontend.rule: "Host:mylar.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  nzbhydra:
+    image: linuxserver/hydra:latest
+    container_name: nzbhydra
+    hostname: hydra
+    ports:
+      - "5075:5075"
+    volumes: 
+      - ${CONFIG}/nzbhydra:/config
+      - ${DOWNLOAD}:/downloads
+    labels:
+      traefik.enable: "true"
+      traefik.port: "5075"
+      traefik.frontend.rule: "Host:nzbhydra.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    hostname: plex
+    ports:
+      - "32400:32400"
+      - "32400:32400/udp"
+      - "32469:32469"
+      - "32469:32469/udp"
+      - "5353:5353/udp"
+      - "1900:1900/udp"
+    volumes:
+      - ${CONFIG}/plex:/config
+      - ${DATA}/tv:/tv
+      - ${DATA}/movies:/movies
+      - ${DATA}/music:/music
+      - ${DATA}/anime:/anime
+    labels:
+      traefik.enable: "true"
+      traefik.port: "32400"
+      traefik.frontend.rule: "Host:plex.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    ports:
+      - 32400:32400
+    environment:
+      version: "latest"
+      TZ: "Europe/London"
+    restart: unless-stopped
+
+  plexpy:
+    image: linuxserver/plexpy:latest
+    container_name: plexpy
+    hostname: plexpy
+    ports:
+      - "8181:8181"
+    volumes:
+      - ${CONFIG}/plexpy:/config
+      - ${CONFIG}/plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8181"
+      traefik.frontend.rule: "Host:plexpy.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  organizr:
+    image: lsiocommunity/organizr:latest
+    container_name: organizr 
+    hostname: organizr
+    volumes:
+      - ${CONFIG}/organizr:/config
+    labels:
+      traefik.enable: "true"
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  ombi:
+    image: linuxserver/ombi
+    container_name: ombi
+    hostname: ombi
+    ports:
+      - "3579:3579"
+    volumes:
+      - ${CONFIG}/ombi:/config
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      traefik.enable: "true"
+      traefik.port: "3579"
+      traefik.frontend.rule: "Host:ombi.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  flexget:
+    image: activ/arch-flexget 
+    container_name: flexget
+    hostname: flexget
+    ports:
+      - "3539:3539"
+    volumes:
+      - ${CONFIG}/flexget:/config
+      - ${DOWNLOAD}:/downloads
+    environment:
+      WEB_PASSWD: "pNTgQj4hfJPPiGVFt9re"
+    labels:
+      traefik.enable: "true"
+      traefik.port: "3539"
+      traefik.frontend.rule: "Host:flexget.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
