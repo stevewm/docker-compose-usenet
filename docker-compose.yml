@@ -67,7 +67,7 @@ services:
     volumes:
       - ${CONFIG}/sonarr:/config
       - /etc/localtime:/etc/localtime:ro
-      - ${DOWNLOAD}:/downloads
+      - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/tv:/tv
       - ${DATA}/anime:/anime
     labels:
@@ -86,7 +86,7 @@ services:
     volumes:
       - ${CONFIG}/radarr:/config
       - /etc/localtime:/etc/localtime:ro
-      - ${DOWNLOAD}:/downloads
+      - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/movies:/movies
     labels:
       traefik.enable: "true"
