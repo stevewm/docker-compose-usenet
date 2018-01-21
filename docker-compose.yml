@@ -50,6 +50,7 @@ services:
       - ${CONFIG}/sabnzbd:/config
       - ${DOWNLOAD}/complete:/downloads
       - ${DOWNLOAD}/incomplete:/incomplete-downloads
+      - ${DOWNLOAD}/watch:/watch
     labels:
       traefik.enable: "true"
       traefik.port: "8080"
@@ -243,7 +244,7 @@ services:
       - "3539:3539"
     volumes:
       - ${CONFIG}/flexget:/config
-      - ${DOWNLOAD}:/downloads
+      - ${DOWNLOAD}/watch:/watch
     environment:
       WEB_PASSWD: "pNTgQj4hfJPPiGVFt9re"
     labels:
