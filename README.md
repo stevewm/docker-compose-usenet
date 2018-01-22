@@ -72,7 +72,7 @@ In the directory containing the files, run `docker-compose up -d`. Each service 
 
 ### Reverse Proxy
 
-Currently this doesn't work due to LetsEncrypt disabling tls-sni-01. You can use the [dnsProvider](https://docs.traefik.io/configuration/acme/#dnsprovider) option in the meantime.
+Currently this doesn't work due to LetsEncrypt disabling tls-sni-01. You can use [http-01](http://v1-5.archive.docs.traefik.io/configuration/acme/#acmehttpchallenge) or [dns-01](http://v1-5.archive.docs.traefik.io/configuration/acme/#acmehttpchallenge) to get certificates.
 
 ### Plex
 
