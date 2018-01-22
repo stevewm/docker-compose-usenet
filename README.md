@@ -70,6 +70,10 @@ In the directory containing the files, run `docker-compose up -d`. Each service 
 
 ## Notes
 
+### Reverse Proxy
+
+Currently this doesn't work due to LetsEncrypt disabling tls-sni-01. You can use the [dnsProvider](https://docs.traefik.io/configuration/acme/#dnsprovider) option in the meantime.
+
 ### Plex
 
 Plex config won't be visible until you SSH tunnel:
@@ -89,3 +93,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 You will need to either change the HTTPS port specified for the UnRAID WebUI (in Settings -> Identification) or change the host port on the Traefik container to something other than 443 and 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host).
+
+
