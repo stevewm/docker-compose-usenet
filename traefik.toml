@@ -1,26 +1,28 @@
-logLevel = "INFO"
-defaultEntryPoints = ["http", "https"]
+debug = false
+
+logLevel = "ERROR"
+defaultEntryPoints = ["https","http"]
 
 [entryPoints]
   [entryPoints.http]
-    address = ":80"
-
-[entryPoints.http.redirect]
-  entryPoint = "https"
-
-[entryPoints.https]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
   address = ":443"
-
-[entryPoints.https.tls]
+  [entryPoints.https.tls]
 
 [entryPoints.https.auth.basic]
   usersFile = "/etc/traefik/.htpasswd"
 
-[acme]
-  email = "YOU@EXAMPLE.COM"
-  storage = "/etc/traefik/acme/acme.json"
-  entryPoint = "https"
-  onHostRule = true
 
-  [[acme.domains]]
-    main = "YOURDOMAIN.TLD" 
+[retry]
+
+[acme]
+email = "YOU@EXAMPLE.COM"
+storage = "acme.json"
+entryPoint = "https"
+OnHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
+
