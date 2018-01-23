@@ -4,7 +4,7 @@ services:
   
   traefik:
     image: traefik:latest
-    command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false 
+    command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false --acme.domains=${DOMAIN}
     container_name: traefik
     hostname: traefik
     ports:
