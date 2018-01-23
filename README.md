@@ -48,7 +48,7 @@ If your timezone is not Europe/London, change the `TZ` value in the service entr
 1. Create a folder called `traefik` in your chosen config directory. Everything below should be executed inside the `traefik` directory
 2. Run `touch acme.json; chmod 600 acme.json; touch .htpasswd`
 3. Use `htpasswd` to generate as many usernames/passwords as required. These will be used by the reverse proxy to protect your services
-4. In `traefik.toml` replace `YOURDOMAIN.TLD` with the same domain specified in your `.env` and replace the example email with your own
+4. In `traefik.toml` replace the example email with your own
 
 
 #### DDClient
@@ -69,10 +69,6 @@ When configuring services to talk to one another, you can simply enter the servi
 In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Organizr should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
 ## Notes
-
-### Reverse Proxy
-
-Currently this doesn't work due to LetsEncrypt disabling tls-sni-01. You can use [http-01](http://v1-5.archive.docs.traefik.io/configuration/acme/#acmehttpchallenge) or [dns-01](http://v1-5.archive.docs.traefik.io/configuration/acme/#acmehttpchallenge) to get certificates.
 
 ### Plex
 
