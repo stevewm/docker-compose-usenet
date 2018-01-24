@@ -88,6 +88,6 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-You will need to either change the HTTPS port specified for the UnRAID WebUI (in Settings -> Identification) or change the host port on the Traefik container to something other than 443 and 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host).
+You will need to either change the HTTPS port specified for the UnRAID WebUI (in Settings -> Identification) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host).
 
 
