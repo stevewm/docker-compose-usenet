@@ -68,6 +68,21 @@ When configuring services to talk to one another, you can simply enter the servi
 
 In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Organizr should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
+If you want to add something to the stack, create a file called `docker-compose.override.yml`, which can be used to override/add to service definitions. This will be picked up by Docker Compose automatically. An example of adding volume mounts:
+
+```
+version: '3'
+
+services:
+  radarr:
+    volumes:
+      - ${DATA}/documentaries:/media/documentaries
+
+  plex:
+    volumes:
+      - ${DATA}/documentaries:/media/documentaries
+```
+
 ## Notes
 
 ### Plex
