@@ -12,7 +12,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${CONFIG}/traefik/acme.json:/etc/traefik/acme/acme.json
+      - ${CONFIG}/traefik/acme.json:/acme.json
       - ${CONFIG}/traefik/traefik.toml:/etc/traefik/traefik.toml
       - ${CONFIG}/traefik/.htpasswd:/etc/traefik/.htpasswd
     labels:
