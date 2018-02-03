@@ -11,10 +11,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${CONFIG}/traefik/acme.json:/acme.json
       - ${CONFIG}/traefik/traefik.toml:/etc/traefik/traefik.toml
-      - ${CONFIG}/traefik/.htpasswd:/etc/traefik/.htpasswd
+      - ${CONFIG}/traefik/.htpasswd:/etc/traefik/.htpasswd:ro
     labels:
       traefik.enable: "true"
       traefik.frontend.rule: "Host:monitor.${DOMAIN}"
