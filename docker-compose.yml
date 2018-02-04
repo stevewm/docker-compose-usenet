@@ -188,7 +188,6 @@ services:
       - 32400:32400
     environment:
       version: "latest"
-      TZ: "Europe/London"
     restart: unless-stopped
 
   plexpy:
