@@ -32,12 +32,13 @@ Pull requests/issues very much welcomed.
 
 Using `example.env`, create a file called `.env` (in the directory you cloned the repo to) by populating the variables with your desired values (see key below). 
 
-| Variable         | Purpose                                                                                |
-|------------------|----------------------------------------------------------------------------------------|
-| CONFIG           | Where the configs for services will live. Each service will have a subdirectory here   |
-| DOWNLOAD         | Where SAB will download files to. The complete and incomplete dirs will be put here    |
-| DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put    |        
-| DOMAIN           | The domain you want to use for access to services from outside your network            |
+| Variable         | Purpose                                                                                   |
+|------------------|-------------------------------------------------------------------------------------------|
+| CONFIG           | Where the configs for services will live. Each service will have a subdirectory here      |
+| DOWNLOAD         | Where SAB will download files to. The complete and incomplete dirs will be put here       |
+| DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put       |        
+| DOMAIN           | The domain you want to use for access to services from outside your network               |
+| TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | 
 
 Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the user who will be running docker.
 
