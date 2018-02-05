@@ -48,7 +48,7 @@ Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` 
 1. Create a folder called `traefik` in your chosen config directory. Everything below should be executed inside the `traefik` directory
 2. Run `touch acme.json; chmod 600 acme.json; touch .htpasswd`
 3. Use `htpasswd` to generate as many usernames/passwords as required. These will be used by the reverse proxy to protect your services
-4. Copy `traefik.toml` to the `config/traefik` directory and replace the example email with your own
+4. Copy `traefik.toml` to the `traefik` directory in your config folder and replace the example email with your own
 
 
 #### DDClient
