@@ -147,17 +147,17 @@ services:
     restart: unless-stopped
 
   nzbhydra:
-    image: linuxserver/hydra:latest
+    image: linuxserver/hydra2:latest
     container_name: nzbhydra
-    hostname: hydra
+    hostname: nzbhydra
     ports:
-      - "5075:5075"
+      - "5076:5076"
     volumes: 
-      - ${CONFIG}/nzbhydra:/config
+      - ${CONFIG}/nzbhydra2:/config
       - ${DOWNLOAD}/complete:/downloads
     labels:
       traefik.enable: "true"
-      traefik.port: "5075"
+      traefik.port: "5076"
       traefik.frontend.rule: "Host:nzbhydra.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
