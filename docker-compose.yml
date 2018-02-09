@@ -115,7 +115,7 @@ services:
   lazylibrarian:
     image: linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
-    hostname: headphones
+    hostname: lazylibrarian
     ports:
       - "5299:5299"
     volumes:
