@@ -8,7 +8,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services. I
 - Headphones
 - Mylar
 - LazyLibrarian
-- NZBHydra
+- NZBHydra v2
 - Ombi
 - FlexGet
 - Plex
