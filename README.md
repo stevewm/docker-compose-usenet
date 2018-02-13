@@ -14,7 +14,6 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services. I
 - Plex
 - PlexPy
 - Organizr
-- Ombi
 - Watchtower
 - DDClient
 
