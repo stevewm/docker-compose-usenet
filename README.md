@@ -8,13 +8,12 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services. I
 - Headphones
 - Mylar
 - LazyLibrarian
-- NZBHydra
+- NZBHydra v2
 - Ombi
 - FlexGet
 - Plex
 - PlexPy
 - Organizr
-- Ombi
 - Watchtower
 - DDClient
 
@@ -60,13 +59,11 @@ If you have a static IP this isn't necessary, and you can simply remove the serv
 3. Use the [protocol documentation](https://sourceforge.net/p/ddclient/wiki/protocols/) to create a config for your chosen DNS provider
 
 
-
-When configuring services to talk to one another, you can simply enter the service name (e.g. sabnzbd) instead of using IP addresses.
-
-
 ### Running 
 
 In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Organizr should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
+
+When configuring services to talk to one another, you can simply enter the service name instead of using IP addresses. For example, in Radarr when setting up a download client enter `sabnzbd` as the host and `8080` as the port.
 
 If you want to add something to the stack, create a file called `docker-compose.override.yml`, which can be used to override/add to service definitions. This will be picked up by Docker Compose automatically. An example of adding volume mounts:
 
