@@ -95,7 +95,9 @@ Once done you can browse to `localhost:8080/web/index.html` and set up your serv
 
 ### UnRAID Usage
 
-Only tested on UnRAID *6.4*. 
+Only tested on UnRAID *6.4.1*. 
+
+#### Installing Docker Compose
 
 Add the following to `/boot/config/go` in order to install docker-compose on each boot:
 ```
@@ -103,6 +105,12 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-You will need to either change the HTTPS port specified for the UnRAID WebUI (in Settings -> Identification) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host).
+#### Persisting user-defined networks
+
+By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change. 
+
+#### UnRAID UI port conflict
+
+You'll need to either change the HTTPS port specified for the UnRAID WebUI (in _Settings_ -> _Identification_) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host) in order to allow Traefik to work properly.
 
 
