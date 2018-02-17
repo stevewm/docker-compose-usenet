@@ -1,27 +1,27 @@
 # Automated Usenet Pipeline
 
-An automated Usenet pipeline with reverse proxy and auto-updating of services. Includes: 
+An automated Usenet pipeline with reverse proxy and auto-updating of services, predominately using the popular linuxserver Docker images. Includes:
 
-- SABnzbd
-- Sonarr
-- Radarr
-- Headphones
-- Mylar
-- LazyLibrarian
-- NZBHydra v2
-- Ombi
-- FlexGet
-- Plex
-- PlexPy
-- Organizr
-- Watchtower
-- DDClient
+- [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/)
+- [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
+- [Radarr](https://hub.docker.com/r/linuxserver/radarr/)
+- [Headphones](https://hub.docker.com/r/linuxserver/headphones/)
+- [Mylar](https://hub.docker.com/r/linuxserver/mylar/)
+- [LazyLibrarian](https://hub.docker.com/r/linuxserver/lazylibrarian/)
+- [NZBHydra v2](https://hub.docker.com/r/linuxserver/hydra2/)
+- [Ombi](https://hub.docker.com/r/linuxserver/ombi/)
+- [FlexGet](https://hub.docker.com/r/activ/arch-flexget/)
+- [Plex](https://hub.docker.com/r/linuxserver/plex/)
+- [PlexPy](https://hub.docker.com/r/linuxserver/plexpy/)
+- [Organizr](https://hub.docker.com/r/lsiocommunity/organizr/)
+- [Watchtower](https://hub.docker.com/r/v2tec/watchtower/)
+- [DDClient](https://hub.docker.com/r/linuxserver/ddclient/)
 
 Pull requests/issues very much welcomed.
 
 ## Requirements
 
-- [Docker](https://store.docker.com/search?type=edition&offering=community) 
+- [Docker](https://store.docker.com/search?type=edition&offering=community)
 - [Docker Compose](https://docs.docker.com/compose/install/).   
 - Domain of your own (not something like duckdns)
 
@@ -29,7 +29,7 @@ Pull requests/issues very much welcomed.
 
 ### Setup
 
-Using `example.env`, create a file called `.env` (in the directory you cloned the repo to) by populating the variables with your desired values (see key below). 
+Using `example.env`, create a file called `.env` (in the directory you cloned the repo to) by populating the variables with your desired values (see key below).
 
 | Variable         | Purpose                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------|
@@ -37,7 +37,7 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | DOWNLOAD         | Where SAB will download files to. The complete and incomplete dirs will be put here       |
 | DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put       |        
 | DOMAIN           | The domain you want to use for access to services from outside your network               |
-| TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | 
+| TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
 Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the user who will be running docker.
 
@@ -59,7 +59,7 @@ If you have a static IP this isn't necessary, and you can simply remove the serv
 3. Use the [protocol documentation](https://sourceforge.net/p/ddclient/wiki/protocols/) to create a config for your chosen DNS provider
 
 
-### Running 
+### Running
 
 In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Organizr should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
@@ -92,7 +92,7 @@ Once done you can browse to `localhost:8080/web/index.html` and set up your serv
 
 ### UnRAID Usage
 
-Only tested on UnRAID *6.4.1*. 
+Only tested on UnRAID *6.4.1*.
 
 #### Installing Docker Compose
 
@@ -104,10 +104,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 #### Persisting user-defined networks
 
-By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change. 
+By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change.
 
 #### UnRAID UI port conflict
 
 You'll need to either change the HTTPS port specified for the UnRAID WebUI (in _Settings_ -> _Identification_) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host) in order to allow Traefik to work properly.
-
-
