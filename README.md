@@ -1,6 +1,6 @@
 # Automated Usenet Pipeline
 
-An automated Usenet pipeline with reverse proxy and auto-updating of services, predominately using the popular linuxserver Docker images. Includes:
+An automated Usenet pipeline with reverse proxy and auto-updating of services, predominantly using the popular linuxserver Docker images. Includes:
 
 - [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
