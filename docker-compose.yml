@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  
+
   traefik:
     image: traefik:latest
     command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false --acme.domains=${DOMAIN}
@@ -20,7 +20,7 @@ services:
       traefik.frontend.rule: "Host:monitor.${DOMAIN}"
       traefik.port: "8080"
       com.centurylinklabs.watchtower.enable: "true"
- 
+
   watchtower:
     image: v2tec/watchtower:latest
     command: --cleanup --label-enable --schedule="0 2 * * *"
@@ -66,7 +66,6 @@ services:
       - "8989:8989"
     volumes:
       - ${CONFIG}/sonarr:/config
-      - /etc/localtime:/etc/localtime:ro
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/tv:/tv
       - ${DATA}/anime:/anime
@@ -85,7 +84,6 @@ services:
       - "7878:7878"
     volumes:
       - ${CONFIG}/radarr:/config
-      - /etc/localtime:/etc/localtime:ro
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/movies:/movies
     labels:
@@ -111,7 +109,7 @@ services:
       traefik.frontend.rule: "Host:headphones.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
-  
+
   lazylibrarian:
     image: linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
@@ -152,7 +150,7 @@ services:
     hostname: nzbhydra
     ports:
       - "5076:5076"
-    volumes: 
+    volumes:
       - ${CONFIG}/nzbhydra2:/config
       - ${DOWNLOAD}/complete:/downloads
     labels:
@@ -208,7 +206,7 @@ services:
 
   organizr:
     image: lsiocommunity/organizr:latest
-    container_name: organizr 
+    container_name: organizr
     hostname: organizr
     volumes:
       - ${CONFIG}/organizr:/config
@@ -227,7 +225,6 @@ services:
       - "3579:3579"
     volumes:
       - ${CONFIG}/ombi:/config
-      - /etc/localtime:/etc/localtime:ro
     labels:
       traefik.enable: "true"
       traefik.port: "3579"
@@ -236,7 +233,7 @@ services:
     restart: unless-stopped
 
   flexget:
-    image: activ/arch-flexget 
+    image: activ/arch-flexget
     container_name: flexget
     hostname: flexget
     ports:
