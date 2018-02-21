@@ -51,6 +51,10 @@ services:
       - ${DOWNLOAD}/complete:/downloads
       - ${DOWNLOAD}/incomplete:/incomplete-downloads
       - ${DOWNLOAD}/watch:/watch
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8080"
@@ -69,6 +73,10 @@ services:
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/tv:/tv
       - ${DATA}/anime:/anime
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8989"
@@ -86,6 +94,10 @@ services:
       - ${CONFIG}/radarr:/config
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/movies:/movies
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "7878"
@@ -103,6 +115,10 @@ services:
       - ${CONFIG}/headphones:/config
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/music:/music
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8181"
@@ -120,6 +136,10 @@ services:
       - ${CONFIG}/lazylibrarian:/config
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/books:/books
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "5299"
@@ -137,6 +157,10 @@ services:
       - ${CONFIG}/mylar:/config
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/comics:/comics
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8090"
@@ -153,6 +177,10 @@ services:
     volumes:
       - ${CONFIG}/nzbhydra2:/config
       - ${DOWNLOAD}/complete:/downloads
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "5076"
@@ -177,6 +205,10 @@ services:
       - ${DATA}/movies:/media/movies
       - ${DATA}/music:/media/music
       - ${DATA}/anime:/media/anime
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "32400"
@@ -197,6 +229,10 @@ services:
     volumes:
       - ${CONFIG}/plexpy:/config
       - ${CONFIG}/plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8181"
@@ -210,6 +246,10 @@ services:
     hostname: organizr
     volumes:
       - ${CONFIG}/organizr:/config
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "80"
@@ -225,6 +265,10 @@ services:
       - "3579:3579"
     volumes:
       - ${CONFIG}/ombi:/config
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "3579"
