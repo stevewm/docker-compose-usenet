@@ -2,7 +2,7 @@
 
 An automated Usenet pipeline with reverse proxy and auto-updating of services, predominantly using the popular linuxserver Docker images. Includes:
 
-- [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/)
+- [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (NZBGet available on a branch)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
 - [Radarr](https://hub.docker.com/r/linuxserver/radarr/)
 - [Headphones](https://hub.docker.com/r/linuxserver/headphones/)
