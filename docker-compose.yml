@@ -221,9 +221,9 @@ services:
     restart: unless-stopped
 
   plexpy:
-    image: linuxserver/plexpy:latest
-    container_name: plexpy
-    hostname: plexpy
+    image: linuxserver/tautulli:latest
+    container_name: tautulli
+    hostname: tautulli
     ports:
       - "8181:8181"
     volumes:
