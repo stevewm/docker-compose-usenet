@@ -209,6 +209,7 @@ services:
       - PGID
       - PUID
       - TZ
+      - VERSION=latest
     labels:
       traefik.enable: "true"
       traefik.port: "32400"
@@ -216,8 +217,6 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     ports:
       - 32400:32400
-    environment:
-      version: "latest"
     restart: unless-stopped
 
   plexpy:
