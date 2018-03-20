@@ -215,8 +215,6 @@ services:
       traefik.port: "32400"
       traefik.frontend.rule: "Host:plex.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    ports:
-      - 32400:32400
     restart: unless-stopped
 
   plexpy:
