@@ -2,7 +2,7 @@
 
 An automated Usenet pipeline with reverse proxy and auto-updating of services, predominantly using the popular linuxserver Docker images. Includes:
 
-- [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (NZBGet available on a branch)
+- [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (can be replaced with NZBGet - see further down)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
 - [Radarr](https://hub.docker.com/r/linuxserver/radarr/)
 - [Headphones](https://hub.docker.com/r/linuxserver/headphones/)
@@ -17,13 +17,12 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [Watchtower](https://hub.docker.com/r/v2tec/watchtower/)
 - [DDClient](https://hub.docker.com/r/linuxserver/ddclient/)
 
-Pull requests/issues very much welcomed.
 
 ## Requirements
 
 - [Docker](https://store.docker.com/search?type=edition&offering=community)
 - [Docker Compose](https://docs.docker.com/compose/install/).   
-- Domain of your own (not something like duckdns)
+- Domain of your own (usage of a free DDNS service such as DuckDNS is not advised or supported)
 
 ## Usage
 
@@ -39,7 +38,7 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | DOMAIN           | The domain you want to use for access to services from outside your network               |
 | TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 
-Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the user who will be running docker.
+Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the owner of the volume directories on the host.
 
 
 #### Traefik
@@ -61,11 +60,49 @@ If you have a static IP this isn't necessary, and you can simply remove the serv
 
 ### Running
 
-In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Organizr should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
+In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Heimdall should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
-When configuring services to talk to one another, you can simply enter the service name instead of using IP addresses. For example, in Radarr when setting up a download client enter `sabnzbd` as the host and `8080` as the port.
 
-If you want to add something to the stack, create a file called `docker-compose.override.yml`, which can be used to override/add to service definitions. This will be picked up by Docker Compose automatically. An example of adding volume mounts:
+#### Service Configuration
+
+When plumbing each of the services together you can simply enter the service name and port instead of using IP addresses. For example, when configuring a download client in Sonarr/Radarr enter `sabnzbd` in the Host field and `8080` in the Port field. The same applies for other services such as NZBHydra.
+
+
+#### Customisation
+
+##### NZBGet
+
+To use NZBGet instead of Sabnzbd, simply replace the `sabnzbd` service entry with the following:
+
+```
+nzbget:
+    image: linuxserver/nzbget:latest
+    container_name: nzbget
+    hostname: nzbget
+    ports:
+      - "6789:6789"
+    volumes:
+      - ${CONFIG}/nzbget:/config
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DOWNLOAD}/incomplete:/incomplete-downloads
+      - ${DOWNLOAD}/watch:/watch
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "6789"
+      traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+restart: unless-stopped
+```
+
+##### Service customisation
+
+To add a new volume mount or otherwise customise an existing service, create a file called `docker-compose.override.yml`.
+
+For example, to add new volume mounts to existing services:
 
 ```
 version: '3'
@@ -80,7 +117,10 @@ services:
       - ${DATA}/documentaries:/media/documentaries
 ```
 
-## Notes
+You can also add new services to the stack using the same method.
+
+
+## Notes / Caveats
 
 ### Plex
 
@@ -90,9 +130,11 @@ Plex config won't be visible until you SSH tunnel:
 
 Once done you can browse to `localhost:8080/web/index.html` and set up your server.
 
+
 ### UnRAID Usage
 
 Only tested on UnRAID *6.4.1*.
+
 
 #### Installing Docker Compose
 
@@ -102,10 +144,19 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+
 #### Persisting user-defined networks
 
 By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change.
 
+
 #### UnRAID UI port conflict
 
 You'll need to either change the HTTPS port specified for the UnRAID WebUI (in _Settings_ -> _Identification_) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host) in order to allow Traefik to work properly.
+
+
+## Help / Contributing
+
+If you need assistance, please file an issue. Please do read the [existing closed issues](https://github.com/duhio/docker-compose-usenet/issues?q=is%3Aissue+is%3Aclosed) as they may contain the answer to your question.
+
+Pull requests for bugfixes/improvements are very much welcomed. As are suggestions of new/replacement services.
