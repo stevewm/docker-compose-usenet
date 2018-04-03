@@ -237,12 +237,12 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
-  organizr:
-    image: lsiocommunity/organizr:latest
-    container_name: organizr
-    hostname: organizr
+  heimdall:
+    image: linuxserver/heimdall:latest
+    container_name: heimdall
+    hostname: heimdall
     volumes:
-      - ${CONFIG}/organizr:/config
+      - ${CONFIG}/heimdall:/config
     environment:
       - PGID
       - PUID
