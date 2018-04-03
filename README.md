@@ -13,7 +13,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [FlexGet](https://hub.docker.com/r/activ/arch-flexget/)
 - [Plex](https://hub.docker.com/r/linuxserver/plex/)
 - [Tautulli (aka PlexPy)](https://hub.docker.com/r/linuxserver/tautulli/)
-- [Organizr](https://hub.docker.com/r/lsiocommunity/organizr/)
+- [Heimdall](https://hub.docker.com/r/linuxserver/heimdall/)
 - [Watchtower](https://hub.docker.com/r/v2tec/watchtower/)
 - [DDClient](https://hub.docker.com/r/linuxserver/ddclient/)
 
