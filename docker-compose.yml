@@ -192,6 +192,7 @@ services:
     image: linuxserver/plex
     container_name: plex
     hostname: plex
+    network_mode: "host"
     ports:
       - "32400:32400"
       - "32400:32400/udp"
