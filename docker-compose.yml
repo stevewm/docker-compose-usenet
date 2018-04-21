@@ -20,6 +20,7 @@ services:
       traefik.frontend.rule: "Host:monitor.${DOMAIN}"
       traefik.port: "8080"
       com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
 
   watchtower:
     image: v2tec/watchtower:latest
