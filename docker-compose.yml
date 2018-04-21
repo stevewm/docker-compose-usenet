@@ -233,7 +233,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.port: "8181"
-      traefik.frontend.rule: "Host:plexpy.${DOMAIN}"
+      traefik.frontend.rule: "Host:tautulli.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
