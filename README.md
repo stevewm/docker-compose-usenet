@@ -5,7 +5,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (can be replaced with NZBGet - see further down)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
 - [Radarr](https://hub.docker.com/r/linuxserver/radarr/)
-- [Headphones](https://hub.docker.com/r/linuxserver/headphones/)
+- [Lidarr](https://hub.docker.com/r/linuxserver/lidarr/)
 - [Mylar](https://hub.docker.com/r/linuxserver/mylar/)
 - [LazyLibrarian](https://hub.docker.com/r/linuxserver/lazylibrarian/)
 - [NZBHydra v2](https://hub.docker.com/r/linuxserver/hydra2/)
