@@ -76,26 +76,26 @@ To use NZBGet instead of Sabnzbd, simply replace the `sabnzbd` service entry wit
 
 ```
 nzbget:
-    image: linuxserver/nzbget:latest
-    container_name: nzbget
-    hostname: nzbget
-    ports:
-      - "6789:6789"
-    volumes:
-      - ${CONFIG}/nzbget:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DOWNLOAD}/incomplete:/incomplete-downloads
-      - ${DOWNLOAD}/watch:/watch
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "6789"
-      traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
-      com.centurylinklabs.watchtower.enable: "true"
-restart: unless-stopped
+  image: linuxserver/nzbget:latest
+  container_name: nzbget
+  hostname: nzbget
+  ports:
+    - "6789:6789"
+  volumes:
+    - ${CONFIG}/nzbget:/config
+    - ${DOWNLOAD}/complete:/downloads
+    - ${DOWNLOAD}/incomplete:/incomplete-downloads
+    - ${DOWNLOAD}/watch:/watch
+  environment:
+    - PGID
+    - PUID
+    - TZ
+  labels:
+    traefik.enable: "true"
+    traefik.port: "6789"
+    traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
+    com.centurylinklabs.watchtower.enable: "true"
+  restart: unless-stopped
 ```
 
 ##### Service customisation
