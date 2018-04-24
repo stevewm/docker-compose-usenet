@@ -120,7 +120,6 @@ services:
     environment:
       - PGID
       - PUID
-      - TZ
     labels:
       traefik.enable: "true"
       traefik.port: "8686"
