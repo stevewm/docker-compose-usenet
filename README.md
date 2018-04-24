@@ -5,7 +5,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (can be replaced with NZBGet - see further down)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
 - [Radarr](https://hub.docker.com/r/linuxserver/radarr/)
-- [Headphones](https://hub.docker.com/r/linuxserver/headphones/)
+- [Lidarr](https://hub.docker.com/r/linuxserver/lidarr/)
 - [Mylar](https://hub.docker.com/r/linuxserver/mylar/)
 - [LazyLibrarian](https://hub.docker.com/r/linuxserver/lazylibrarian/)
 - [NZBHydra v2](https://hub.docker.com/r/linuxserver/hydra2/)
@@ -76,26 +76,26 @@ To use NZBGet instead of Sabnzbd, simply replace the `sabnzbd` service entry wit
 
 ```
 nzbget:
-    image: linuxserver/nzbget:latest
-    container_name: nzbget
-    hostname: nzbget
-    ports:
-      - "6789:6789"
-    volumes:
-      - ${CONFIG}/nzbget:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DOWNLOAD}/incomplete:/incomplete-downloads
-      - ${DOWNLOAD}/watch:/watch
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "6789"
-      traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
-      com.centurylinklabs.watchtower.enable: "true"
-restart: unless-stopped
+  image: linuxserver/nzbget:latest
+  container_name: nzbget
+  hostname: nzbget
+  ports:
+    - "6789:6789"
+  volumes:
+    - ${CONFIG}/nzbget:/config
+    - ${DOWNLOAD}/complete:/downloads
+    - ${DOWNLOAD}/incomplete:/incomplete-downloads
+    - ${DOWNLOAD}/watch:/watch
+  environment:
+    - PGID
+    - PUID
+    - TZ
+  labels:
+    traefik.enable: "true"
+    traefik.port: "6789"
+    traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
+    com.centurylinklabs.watchtower.enable: "true"
+  restart: unless-stopped
 ```
 
 ##### Service customisation

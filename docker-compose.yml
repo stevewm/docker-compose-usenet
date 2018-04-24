@@ -105,25 +105,25 @@ services:
       traefik.frontend.rule: "Host:radarr.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
-
-  headphones:
-    image: linuxserver/headphones:latest
-    container_name: headphones
-    hostname: headphones
+ 
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: lidarr
+    hostname: lidarr
     ports:
-      - "8282:8181"
+      - "8686:8686"
     volumes:
-      - ${CONFIG}/headphones:/config
+      - ${CONFIG}/lidarr:/config
+      - /etc/localtime:/etc/localtime:ro
       - ${DOWNLOAD}/complete:/downloads
       - ${DATA}/music:/music
     environment:
       - PGID
       - PUID
-      - TZ
     labels:
       traefik.enable: "true"
-      traefik.port: "8181"
-      traefik.frontend.rule: "Host:headphones.${DOMAIN}"
+      traefik.port: "8686"
+      traefik.frontend.rule: "Host:lidarr.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
