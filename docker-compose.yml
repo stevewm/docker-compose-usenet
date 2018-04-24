@@ -128,27 +128,6 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
-  headphones:
-    image: linuxserver/headphones:latest
-    container_name: headphones
-    hostname: headphones
-    ports:
-      - "8282:8181"
-    volumes:
-      - ${CONFIG}/headphones:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/music:/music
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "8181"
-      traefik.frontend.rule: "Host:headphones.${DOMAIN}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
   lazylibrarian:
     image: linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
