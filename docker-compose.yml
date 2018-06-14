@@ -19,6 +19,7 @@ services:
       traefik.enable: "true"
       traefik.frontend.rule: "Host:monitor.${DOMAIN}"
       traefik.port: "8080"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -60,6 +61,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8080"
       traefik.frontend.rule: "Host:sabnzbd.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -82,6 +84,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8989"
       traefik.frontend.rule: "Host:sonarr.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -103,6 +106,7 @@ services:
       traefik.enable: "true"
       traefik.port: "7878"
       traefik.frontend.rule: "Host:radarr.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
  
@@ -124,6 +128,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8686"
       traefik.frontend.rule: "Host:lidarr.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -145,6 +150,7 @@ services:
       traefik.enable: "true"
       traefik.port: "5299"
       traefik.frontend.rule: "Host:lazylibrarian.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -166,6 +172,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8090"
       traefik.frontend.rule: "Host:mylar.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -186,6 +193,7 @@ services:
       traefik.enable: "true"
       traefik.port: "5076"
       traefik.frontend.rule: "Host:nzbhydra.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -235,6 +243,7 @@ services:
       traefik.enable: "true"
       traefik.port: "8181"
       traefik.frontend.rule: "Host:tautulli.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -252,6 +261,7 @@ services:
       traefik.enable: "true"
       traefik.port: "80"
       traefik.frontend.rule: "Host:${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -271,6 +281,7 @@ services:
       traefik.enable: "true"
       traefik.port: "3579"
       traefik.frontend.rule: "Host:ombi.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -289,5 +300,6 @@ services:
       traefik.enable: "true"
       traefik.port: "3539"
       traefik.frontend.rule: "Host:flexget.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
