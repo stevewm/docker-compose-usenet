@@ -119,18 +119,6 @@ services:
 
 You can also add new services to the stack using the same method.
 
-
-## Notes / Caveats
-
-### Plex
-
-Plex config won't be visible until you SSH tunnel:
-
-- `ssh -L 8080:localhost:32400 user@dockerhost`
-
-Once done you can browse to `localhost:8080/web/index.html` and set up your server.
-
-
 ### UnRAID Usage
 
 Only tested on UnRAID *6.4.1*.
