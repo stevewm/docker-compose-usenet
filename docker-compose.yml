@@ -281,7 +281,6 @@ services:
       traefik.enable: "true"
       traefik.port: "3579"
       traefik.frontend.rule: "Host:ombi.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
