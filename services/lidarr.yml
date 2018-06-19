@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: lidarr
+    hostname: lidarr
+    ports:
+      - "8686:8686"
+    volumes:
+      - ${CONFIG}/lidarr:/config
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DATA}/music:/music
+    environment:
+      - PGID
+      - PUID
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8686"
+      traefik.frontend.rule: "Host:lidarr.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+

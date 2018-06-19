@@ -29,6 +29,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 ### Setup
 
 Using `example.env`, create a file called `.env` (in the directory you cloned the repo to) by populating the variables with your desired values (see key below).
+Or edit example.env directly and the first run will copy it to the .env if .env does not already exist.
 
 | Variable         | Purpose                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------|
@@ -37,16 +38,12 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put       |        
 | DOMAIN           | The domain you want to use for access to services from outside your network               |
 | TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| HTPASSWD         | HTTP Basic Auth entries in HTPASSWD format [Generate Here](http://www.htaccesstools.com/htpasswd-generator/)|
+| service(e.g. plex)| Set to 1 to enable or 0 to disable                                                       |
 
 Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the owner of the volume directories on the host.
 
-
-#### Traefik
-
-1. Create a folder called `traefik` in your chosen config directory. Everything below should be executed inside the `traefik` directory
-2. Run `touch acme.json; chmod 600 acme.json; touch .htpasswd`
-3. Use `htpasswd` to generate as many usernames/passwords as required. These will be used by the reverse proxy to protect your services
-4. Copy `traefik.toml` to the `traefik` directory in your config folder and replace the example email with your own
+Update Traefik email in traefik.toml before running the first `bash up.sh` to copy ./traefik.toml to ./config/traefik/traefik.toml
 
 
 #### DDClient
@@ -60,7 +57,11 @@ If you have a static IP this isn't necessary, and you can simply remove the serv
 
 ### Running
 
-In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Heimdall should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
+In the directory containing the files, run `bash up.sh`. 
+
+Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. 
+Heimdall should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services (This is not automated.) 
+The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
 
 #### Service Configuration
@@ -72,37 +73,14 @@ When plumbing each of the services together you can simply enter the service nam
 
 ##### NZBGet
 
-To use NZBGet instead of Sabnzbd, simply replace the `sabnzbd` service entry with the following:
-
-```
-nzbget:
-  image: linuxserver/nzbget:latest
-  container_name: nzbget
-  hostname: nzbget
-  ports:
-    - "6789:6789"
-  volumes:
-    - ${CONFIG}/nzbget:/config
-    - ${DOWNLOAD}/complete:/downloads
-    - ${DOWNLOAD}/incomplete:/incomplete-downloads
-    - ${DOWNLOAD}/watch:/watch
-  environment:
-    - PGID
-    - PUID
-    - TZ
-  labels:
-    traefik.enable: "true"
-    traefik.port: "6789"
-    traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
-    com.centurylinklabs.watchtower.enable: "true"
-  restart: unless-stopped
-```
+To use NZBGet instead of Sabnzbd, simply set nzbget=1 and sabnzbd=0 in your `.env`
 
 ##### Service customisation
 
-To add a new volume mount or otherwise customise an existing service, create a file called `docker-compose.override.yml`.
+To add a new volume mount or otherwise customise an existing service, create a file in services/servicename.yml.
 
-For example, to add new volume mounts to existing services:
+To customise an existing service without modifying the git source, add your customisation to custom/servicename.yml (e.g. custom/radarr.yml) 
+For example, to add new volume mounts to radarr:
 
 ```
 version: '3'
@@ -112,51 +90,20 @@ services:
     volumes:
       - ${DATA}/documentaries:/media/documentaries
 
-  plex:
-    volumes:
-      - ${DATA}/documentaries:/media/documentaries
 ```
-
-You can also add new services to the stack using the same method.
-
 
 ## Notes / Caveats
 
 ### Plex
 
-Plex config won't be visible until you SSH tunnel:
+Plex config may not be visible until you SSH tunnel:
 
 - `ssh -L 8080:localhost:32400 user@dockerhost`
 
 Once done you can browse to `localhost:8080/web/index.html` and set up your server.
 
-
-### UnRAID Usage
-
-Only tested on UnRAID *6.4.1*.
-
-
-#### Installing Docker Compose
-
-Add the following to `/boot/config/go` in order to install docker-compose on each boot:
-```
-sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
-
-
-#### Persisting user-defined networks
-
-By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change.
-
-
-#### UnRAID UI port conflict
-
-You'll need to either change the HTTPS port specified for the UnRAID WebUI (in _Settings_ -> _Identification_) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host) in order to allow Traefik to work properly.
-
-
 ## Help / Contributing
 
-If you need assistance, please file an issue. Please do read the [existing closed issues](https://github.com/duhio/docker-compose-usenet/issues?q=is%3Aissue+is%3Aclosed) as they may contain the answer to your question.
+If you need assistance, please file an issue. Please do read the existing closed issues as they may contain the answer to your question.
 
 Pull requests for bugfixes/improvements are very much welcomed. As are suggestions of new/replacement services.

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  mylar:
+    image: linuxserver/mylar:latest
+    container_name: mylar
+    hostname: mylar
+    ports:
+      - "8090:8090"
+    volumes:
+      - ${CONFIG}/mylar:/config
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DATA}/comics:/comics
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8090"
+      traefik.frontend.rule: "Host:mylar.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+

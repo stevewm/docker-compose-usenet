@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    hostname: sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - ${CONFIG}/sonarr:/config
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DATA}/tv:/tv
+      - ${DATA}/anime:/anime
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "8989"
+      traefik.frontend.rule: "Host:sonarr.${DOMAIN}"
+      traefik.frontend.auth.basic: ${HTPASSWD}
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+

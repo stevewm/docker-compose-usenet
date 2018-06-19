@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  nzbhydra:
+    image: linuxserver/hydra2:latest
+    container_name: nzbhydra
+    hostname: nzbhydra
+    ports:
+      - "5076:5076"
+    volumes:
+      - ${CONFIG}/nzbhydra2:/config
+      - ${DOWNLOAD}/complete:/downloads
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "5076"
+      traefik.frontend.rule: "Host:nzbhydra.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped

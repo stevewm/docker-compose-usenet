@@ -1,3 +1,5 @@
+custom/
+config/
 acme.json
 .env
 docker-compose.override.yml

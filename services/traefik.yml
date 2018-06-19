@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  traefik:
+    image: traefik:latest
+    command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false --acme.domains=${DOMAIN}
+    container_name: traefik
+    hostname: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${CONFIG}/traefik/acme.json:/acme.json
+      - ${CONFIG}/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - ${CONFIG}/traefik/.htpasswd:/etc/traefik/.htpasswd:ro
+    labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host:monitor.${DOMAIN}"
+      traefik.port: "8080"
+      traefik.frontend.auth.basic: ${HTPASSWD}
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
