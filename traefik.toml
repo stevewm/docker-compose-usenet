@@ -12,10 +12,6 @@ defaultEntryPoints = ["https","http"]
   address = ":443"
   [entryPoints.https.tls]
 
-[entryPoints.https.auth.basic]
-  usersFile = "/etc/traefik/.htpasswd"
-
-
 [retry]
 
 [acme]
