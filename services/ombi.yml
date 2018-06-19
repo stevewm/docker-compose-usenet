@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  ombi:
+    image: linuxserver/ombi
+    container_name: ombi
+    hostname: ombi
+    ports:
+      - "3579:3579"
+    volumes:
+      - ${CONFIG}/ombi:/config
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "3579"
+      traefik.frontend.rule: "Host:ombi.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+

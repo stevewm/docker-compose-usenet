@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  lazylibrarian:
+    image: linuxserver/lazylibrarian:latest
+    container_name: lazylibrarian
+    hostname: lazylibrarian
+    ports:
+      - "5299:5299"
+    volumes:
+      - ${CONFIG}/lazylibrarian:/config
+      - ${DOWNLOAD}/complete:/downloads
+      - ${DATA}/books:/books
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "5299"
+      traefik.frontend.rule: "Host:lazylibrarian.${DOMAIN}"
+      traefik.frontend.auth.basic: "${HTPASSWD}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
