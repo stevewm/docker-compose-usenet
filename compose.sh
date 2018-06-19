@@ -3,6 +3,7 @@ for i in $(cat .env); do
 	export $i
 done
 
+mkdir -p custom
 mkdir -p config/traefik 
 touch config/traefik/acme.json
 chmod 600 config/traefik/acme.json
@@ -22,6 +23,9 @@ for filename in services/*.yml; do
 	if [ ${!base:-0} -eq 1 ] ; then
 #		echo "including $base in compose"
 		CMD_ARGS="${CMD_ARGS} -f ${filename}"
+		if [ -f "custom/${filename}" ] ; then
+			CMD_ARGS="${CMD_ARGS} -f custom/${filename}"
+		fi
 #	else 
 #		echo "$base not enabled"
 	fi
