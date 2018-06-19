@@ -133,7 +133,7 @@ Once done you can browse to `localhost:8080/web/index.html` and set up your serv
 
 ### UnRAID Usage
 
-Only tested on UnRAID *6.4.1*.
+Only tested on UnRAID *6.4.1+*.
 
 
 #### Installing Docker Compose
