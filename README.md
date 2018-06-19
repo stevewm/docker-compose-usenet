@@ -37,6 +37,7 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put       |        
 | DOMAIN           | The domain you want to use for access to services from outside your network               |
 | TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| HTPASSWD         | HTTP Basic Auth entries in HTPASSWD format [Generate Here](http://www.htaccesstools.com/htpasswd-generator/)|
 
 Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the owner of the volume directories on the host.
 
@@ -44,9 +45,8 @@ Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` 
 #### Traefik
 
 1. Create a folder called `traefik` in your chosen config directory. Everything below should be executed inside the `traefik` directory
-2. Run `touch acme.json; chmod 600 acme.json; touch .htpasswd`
-3. Use `htpasswd` to generate as many usernames/passwords as required. These will be used by the reverse proxy to protect your services
-4. Copy `traefik.toml` to the `traefik` directory in your config folder and replace the example email with your own
+2. Run `touch acme.json; chmod 600 acme.json`
+3. Copy `traefik.toml` to the `traefik` directory in your config folder and replace the example email with your own
 
 
 #### DDClient
@@ -118,18 +118,6 @@ services:
 ```
 
 You can also add new services to the stack using the same method.
-
-
-## Notes / Caveats
-
-### Plex
-
-Plex config won't be visible until you SSH tunnel:
-
-- `ssh -L 8080:localhost:32400 user@dockerhost`
-
-Once done you can browse to `localhost:8080/web/index.html` and set up your server.
-
 
 ### UnRAID Usage
 

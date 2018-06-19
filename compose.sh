@@ -8,11 +8,11 @@ touch config/traefik/acme.json
 chmod 600 config/traefik/acme.json
 
 if [ ! -f .env ] && [ -f example.env]; then
-        mv example.env .env
+        cp example.env .env
 fi;
 
 if [ ! -f config/traefik/traefik.toml ] && [ -f traefik.toml]; then
-	mv traefik.toml config/traefik.toml
+	cp traefik.toml config/traefik/traefik.toml
 fi;
 
 CMD_ARGS='-f docker-compose.yml'
