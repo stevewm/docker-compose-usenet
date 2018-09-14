@@ -1,10 +1,12 @@
+---
 version: '3'
 
 services:
 
   traefik:
     image: traefik:latest
-    command: --web --docker --docker.watch --docker.domain=${DOMAIN} --docker.exposedbydefault=false --acme.domains=${DOMAIN}
+    command: --web --docker --docker.watch --docker.domain=${DOMAIN} \
+             --docker.exposedbydefault=false --acme.domains=${DOMAIN}
     container_name: traefik
     hostname: traefik
     ports:
@@ -109,7 +111,7 @@ services:
       traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
- 
+
   lidarr:
     image: linuxserver/lidarr:latest
     container_name: lidarr
@@ -285,7 +287,7 @@ services:
     restart: unless-stopped
 
   flexget:
-    image: cpoppema/docker-flexget 
+    image: cpoppema/docker-flexget
     container_name: flexget
     hostname: flexget
     ports:
