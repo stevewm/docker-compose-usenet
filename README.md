@@ -10,7 +10,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [LazyLibrarian](https://hub.docker.com/r/linuxserver/lazylibrarian/)
 - [NZBHydra v2](https://hub.docker.com/r/linuxserver/hydra2/)
 - [Ombi](https://hub.docker.com/r/linuxserver/ombi/)
-- [FlexGet](https://hub.docker.com/r/activ/arch-flexget/)
+- [FlexGet](https://hub.docker.com/r/cpoppema/docker-flexget/)
 - [Plex](https://hub.docker.com/r/linuxserver/plex/)
 - [Tautulli (aka PlexPy)](https://hub.docker.com/r/linuxserver/tautulli/)
 - [Heimdall](https://hub.docker.com/r/linuxserver/heimdall/)
