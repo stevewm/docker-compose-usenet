@@ -1,0 +1,6 @@
+services:
+- docker
+
+script:
+- cp example.env .env
+- docker-compose config
