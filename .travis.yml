@@ -9,7 +9,7 @@ before_install:
 script:
   - yamllint -c .lint.yml docker-compose.yml
   - cp example.env .env
-  - docker-compose config
+  - docker-compose config --services
 
 notifications:
   email: false
