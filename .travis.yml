@@ -10,3 +10,6 @@ script:
   - yamllint -c .lint.yml docker-compose.yml
   - cp example.env .env
   - docker-compose config
+
+notifications:
+  email: false
