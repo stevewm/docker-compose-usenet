@@ -1,10 +1,10 @@
 ---
+language: python
 services:
   - docker
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install yamllint -qq
+  - sudo pip install yamllint
 
 script:
   - yamllint -c .lint.yml docker-compose.yml
