@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - sudo pip install yamllint
+  - sudo pip install yamllint -qqq
 
 script:
   - yamllint -c .lint.yml docker-compose.yml
