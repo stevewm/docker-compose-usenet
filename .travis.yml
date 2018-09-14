@@ -1,6 +1,12 @@
+---
 services:
-- docker
+  - docker
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install yamllint -qq
 
 script:
-- cp example.env .env
-- docker-compose config
+  - yamllint docker-compose.yml
+  - cp example.env .env
+  - docker-compose config
