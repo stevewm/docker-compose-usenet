@@ -7,6 +7,6 @@ before_install:
   - sudo apt-get install yamllint -qq
 
 script:
-  - yamllint docker-compose.yml
+  - yamllint -c .lint.yml docker-compose.yml
   - cp example.env .env
   - docker-compose config
