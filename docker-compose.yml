@@ -285,7 +285,7 @@ services:
     restart: unless-stopped
 
   flexget:
-    image: activ/arch-flexget
+    image: cpoppema/docker-flexget 
     container_name: flexget
     hostname: flexget
     ports:
@@ -294,7 +294,9 @@ services:
       - ${CONFIG}/flexget:/config
       - ${DOWNLOAD}/watch:/watch
     environment:
-      WEB_PASSWD: "pNTgQj4hfJPPiGVFt9re"
+      - PGID
+      - PUID
+      - WEB_PASSWD="pNTgQj4hfJPPiGVFt9re"
     labels:
       traefik.enable: "true"
       traefik.port: "3539"
