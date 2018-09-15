@@ -1,0 +1,7 @@
+---
+extends: default
+
+rules:
+  # Because the Plex volume is just over 80 :(
+  line-length:
+    max: 85

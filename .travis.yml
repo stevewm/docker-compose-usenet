@@ -1,0 +1,18 @@
+---
+language: python
+services:
+  - docker
+
+before_install:
+  - sudo pip install yamllint -qqq
+
+script:
+  - yamllint -c .lint.yml docker-compose.yml
+  - cp example.env .env
+  - docker-compose config --services
+
+notifications:
+  email: false
+
+git:
+  quiet: true
