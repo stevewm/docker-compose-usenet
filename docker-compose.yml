@@ -291,17 +291,17 @@ services:
     container_name: flexget
     hostname: flexget
     ports:
-      - "3539:3539"
+      - "5050:5050"
     volumes:
       - ${CONFIG}/flexget:/config
       - ${DOWNLOAD}/watch:/watch
     environment:
       - PGID
       - PUID
-      - WEB_PASSWD="pNTgQj4hfJPPiGVFt9re"
+      - WEB_PASSWD=pNTgQj4hfJPPiGVFt9re
     labels:
       traefik.enable: "true"
-      traefik.port: "3539"
+      traefik.port: "5050"
       traefik.frontend.rule: "Host:flexget.${DOMAIN}"
       traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
