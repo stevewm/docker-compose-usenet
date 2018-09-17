@@ -38,7 +38,7 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | DATA             | Where your data is stored and where sub-directories for tv, movies, etc will be put       |
 | DOMAIN           | The domain you want to use for access to services from outside your network               |
 | TZ               | Your timezone. [List here.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
-| HTPASSWD         | HTTP Basic Auth entries in HTPASSWD format [Generate Here](http://www.htaccesstools.com/htpasswd-generator/)|
+| HTPASSWD         | HTTP Basic Auth entries in HTPASSWD format ([generate here](http://www.htaccesstools.com/htpasswd-generator/))|
 
 Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` where `user` is the owner of the volume directories on the host.
 
