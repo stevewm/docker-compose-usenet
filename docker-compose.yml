@@ -249,7 +249,7 @@ services:
     restart: unless-stopped
 
   heimdall:
-    image: linuxserver/heimdall:latest
+    image: duhio/heimdall-https:latest
     container_name: heimdall
     hostname: heimdall
     volumes:
@@ -258,6 +258,7 @@ services:
       - PGID
       - PUID
       - TZ
+      - FORCE_HTTPS=true
     labels:
       traefik.enable: "true"
       traefik.port: "80"
