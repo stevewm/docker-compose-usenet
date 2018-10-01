@@ -258,7 +258,6 @@ services:
       - PGID
       - PUID
       - TZ
-      - FORCE_HTTPS=true
     labels:
       traefik.enable: "true"
       traefik.port: "80"
