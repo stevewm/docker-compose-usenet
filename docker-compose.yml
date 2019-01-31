@@ -30,12 +30,12 @@ services:
     container_name: ouroboros
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    environment: 
+    environment:
       - PGID
       - PUID
       - TZ
       - CLEANUP=true
-      - INTERVAL=86400 # 24hrs
+      - INTERVAL=86400  # 24hrs
       - SELF_UPDATE=true
       - LABELS_ONLY=true
     restart: unless-stopped
