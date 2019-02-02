@@ -91,7 +91,7 @@ nzbget:
     traefik.port: "6789"
     traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
     traefik.frontend.auth.basic: "${HTPASSWD}"
-    com.centurylinklabs.watchtower.enable: "true"
+    com.ouroboros.enable: "true"
   restart: unless-stopped
 ```
 
