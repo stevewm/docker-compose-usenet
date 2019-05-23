@@ -34,7 +34,7 @@ services:
       - PGID
       - PUID
       - TZ
-    command: --schedule "0 0 6 * * *" --label-enable --cleanup 
+    command: --schedule "0 0 6 * * *" --label-enable --cleanup
     restart: unless-stopped
 
   ddclient:
