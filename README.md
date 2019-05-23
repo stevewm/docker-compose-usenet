@@ -16,7 +16,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [Plex](https://hub.docker.com/r/linuxserver/plex/)
 - [Tautulli (aka PlexPy)](https://hub.docker.com/r/linuxserver/tautulli/)
 - [Heimdall](https://hub.docker.com/r/duhio/heimdall-https/)
-- [Ouroboros](https://hub.docker.com/r/pyouroboros/ouroboros/)
+- [Watchtower](https://github.com/containrrr/watchtower)
 - [DDClient](https://hub.docker.com/r/linuxserver/ddclient/)
 
 ## Requirements
@@ -91,7 +91,7 @@ nzbget:
     traefik.port: "6789"
     traefik.frontend.rule: "Host:nzbget.${DOMAIN}"
     traefik.frontend.auth.basic: "${HTPASSWD}"
-    com.ouroboros.enable: "true"
+    com.centurylinklabs.watchtower.enable: "true"
   restart: unless-stopped
 ```
 
