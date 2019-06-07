@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/duhio/docker-compose-usenet.svg?branch=master)](https://travis-ci.org/duhio/docker-compose-usenet)
 
-An automated Usenet pipeline with reverse proxy and auto-updating of services, predominantly using the popular linuxserver Docker images. Includes:
+An automated Usenet media pipeline with reverse proxy and auto-updating of services, predominantly using the popular linuxserver Docker images. Includes:
 
 - [SABnzbd](https://hub.docker.com/r/linuxserver/sabnzbd/) (can be replaced with NZBGet - see further down)
 - [Sonarr](https://hub.docker.com/r/linuxserver/sonarr/)
@@ -114,7 +114,9 @@ services:
       - ${DATA}/documentaries:/media/documentaries
 ```
 
-You can also add new services to the stack using the same method.
+You can also add new services to the stack using the same method. 
+
+See the [docker-compose documentation](https://docs.docker.com/compose/extends/#adding-and-overriding-configuration) for more information.
 
 ## Notes / Caveats
 
@@ -142,7 +144,7 @@ chmod +x /usr/local/bin/docker-compose
 
 #### Persisting user-defined networks
 
-By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to on and stop the Docker service to make the change.
+By default, UnRAID will not persist user-defined Docker networks such as the one this stack will create. You'll need to enable this setting in order to avoid having to re-run `docker-compose up -d` every time your server is rebooted. It's found in the _Docker_ tab, you'll need to set _Advanced View_ to On and stop the Docker service to make the change.
 
 #### UnRAID UI port conflict
 
