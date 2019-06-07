@@ -251,7 +251,7 @@ services:
     restart: unless-stopped
 
   heimdall:
-    image: duhio/heimdall-https:latest
+    image: linuxserver/heimdall:latest
     container_name: heimdall
     hostname: heimdall
     volumes:
