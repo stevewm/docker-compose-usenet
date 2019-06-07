@@ -15,7 +15,7 @@ An automated Usenet media pipeline with reverse proxy and auto-updating of servi
 - [FlexGet](https://hub.docker.com/r/cpoppema/docker-flexget/)
 - [Plex](https://hub.docker.com/r/linuxserver/plex/)
 - [Tautulli (aka PlexPy)](https://hub.docker.com/r/linuxserver/tautulli/)
-- [Heimdall](https://hub.docker.com/r/duhio/heimdall-https/)
+- [Heimdall](https://hub.docker.com/r/linuxserver/heimdall/)
 - [Watchtower](https://github.com/containrrr/watchtower)
 - [DDClient](https://hub.docker.com/r/linuxserver/ddclient/)
 
