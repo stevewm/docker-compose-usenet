@@ -42,6 +42,10 @@ services:
     container_name: ddclient
     volumes:
       - ${CONFIG}/ddclient:/config
+    environment:
+      - PGID
+      - PUID
+      - TZ      
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
