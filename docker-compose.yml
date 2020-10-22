@@ -181,7 +181,7 @@ services:
     restart: unless-stopped
 
   nzbhydra:
-    image: linuxserver/hydra2:latest
+    image: linuxserver/nzbhydra2:latest
     container_name: nzbhydra
     hostname: nzbhydra
     ports:
