@@ -10,7 +10,7 @@ An automated Usenet media pipeline with reverse proxy and auto-updating of servi
 - [Lidarr](https://hub.docker.com/r/linuxserver/lidarr/)
 - [Mylar](https://hub.docker.com/r/linuxserver/mylar/)
 - [LazyLibrarian](https://hub.docker.com/r/linuxserver/lazylibrarian/)
-- [NZBHydra v2](https://hub.docker.com/r/linuxserver/hydra2/)
+- [NZBHydra v2](https://hub.docker.com/r/linuxserver/nzbhydra2/)
 - [Ombi](https://hub.docker.com/r/linuxserver/ombi/)
 - [FlexGet](https://hub.docker.com/r/cpoppema/docker-flexget/)
 - [Plex](https://hub.docker.com/r/linuxserver/plex/)
