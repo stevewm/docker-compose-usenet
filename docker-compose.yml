@@ -50,8 +50,6 @@ services:
     image: linuxserver/sabnzbd:latest
     container_name: sabnzbd
     hostname: sabnzbd
-    ports:
-      - "8080:8080"
     volumes:
       - ${CONFIG}/sabnzbd:/config
       - ${DOWNLOAD}/complete:/downloads
@@ -73,8 +71,6 @@ services:
     image: linuxserver/sonarr:latest
     container_name: sonarr
     hostname: sonarr
-    ports:
-      - "8989:8989"
     volumes:
       - ${CONFIG}/sonarr:/config
       - ${DOWNLOAD}/complete:/downloads
@@ -96,8 +92,6 @@ services:
     image: linuxserver/radarr:latest
     container_name: radarr
     hostname: radarr
-    ports:
-      - "7878:7878"
     volumes:
       - ${CONFIG}/radarr:/config
       - ${DOWNLOAD}/complete:/downloads
@@ -118,8 +112,6 @@ services:
     image: linuxserver/lidarr:latest
     container_name: lidarr
     hostname: lidarr
-    ports:
-      - "8686:8686"
     volumes:
       - ${CONFIG}/lidarr:/config
       - /etc/localtime:/etc/localtime:ro
@@ -140,8 +132,6 @@ services:
     image: linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     hostname: lazylibrarian
-    ports:
-      - "5299:5299"
     volumes:
       - ${CONFIG}/lazylibrarian:/config
       - ${DOWNLOAD}/complete:/downloads
@@ -162,8 +152,6 @@ services:
     image: linuxserver/mylar:latest
     container_name: mylar
     hostname: mylar
-    ports:
-      - "8090:8090"
     volumes:
       - ${CONFIG}/mylar:/config
       - ${DOWNLOAD}/complete:/downloads
@@ -207,10 +195,6 @@ services:
     hostname: plex
     ports:
       - "32400:32400"
-      - "32400:32400/udp"
-      - "32469:32469"
-      - "32469:32469/udp"
-      - "1900:1900/udp"
     volumes:
       - ${CONFIG}/plex:/config
       - ${DATA}/tv:/media/tv
@@ -233,8 +217,6 @@ services:
     image: linuxserver/tautulli:latest
     container_name: tautulli
     hostname: tautulli
-    ports:
-      - "8181:8181"
     volumes:
       - ${CONFIG}/plexpy:/config
       - ${CONFIG}/plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
@@ -291,8 +273,6 @@ services:
     image: cpoppema/docker-flexget
     container_name: flexget
     hostname: flexget
-    ports:
-      - "5050:5050"
     volumes:
       - ${CONFIG}/flexget:/config
       - ${DOWNLOAD}/watch:/watch
